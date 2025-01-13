@@ -1,67 +1,27 @@
-const adminPaths2 = [
+const adminPaths = [
   {
     name: "Dashboard",
     path: "dashboard",
-    element: "dsadhf",
+    element: <AdminDashboard></AdminDashboard>,
   },
   {
     name: "User Manegement",
-    Children: [
+    children: [
       {
         name: "Create Student",
         path: "create-student",
-        element: "dfsghj",
+        element: <CreateStudent></CreateStudent>,
       },
       {
         name: "Create Faculty",
         path: "create-faculty",
-        element: "hdsgf",
+        element: <CreateFaculty></CreateFaculty>,
       },
       {
         name: "Create Admin",
         path: "create-admin",
-        element: "yhjas",
+        element: <CreateAdmin></CreateAdmin>,
       },
     ],
   },
 ];
-
-const adminRoutes = adminPaths2.reduce((acc, item) => {
-  if (item.path && item.element) {
-    acc.push({
-      path: item.path,
-      element: item.element,
-    });
-  }
-  if (item.children) {
-    item.children.forEach((child) => {
-      acc.push({
-        path: child.path,
-        element: child.element,
-      });
-    });
-  }
-  return acc;
-}, []);
-
-console.log(adminRoutes);
-
-// const newArray = adminPaths2.reduce((acc, item) => {
-//   if (item.path && item.element) {
-//     acc.push({
-//       path: item.path,
-//       element: item.element,
-//     });
-//   }
-//   if (item.Children) {
-//     item.Children.forEach((child) => {
-//       acc.push({
-//         path: child.path,
-//         element: child.element,
-//       });
-//     });
-//   }
-//   return acc;
-// }, []);
-
-// console.log(newArray);

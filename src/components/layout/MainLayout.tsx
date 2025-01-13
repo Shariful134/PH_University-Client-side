@@ -4,12 +4,13 @@
 //   VideoCameraOutlined,
 // } from "@ant-design/icons";
 
-import { Layout, Menu, MenuProps } from "antd";
-import { NavLink, Outlet } from "react-router";
-import { adminSidebarItem } from "../../routes/admin.routes";
+import { Layout } from "antd";
+import { Outlet } from "react-router";
+import Sidebar from "./Sidebar";
+
 // import { createElement } from "react";
 
-const { Header, Content, Footer, Sider } = Layout;
+const { Header, Content, Footer } = Layout;
 
 // const items: MenuProps["items"] = [
 //   {
@@ -38,34 +39,7 @@ const { Header, Content, Footer, Sider } = Layout;
 const MainLayout = () => {
   return (
     <Layout style={{ height: "100vh" }}>
-      <Sider
-        breakpoint="lg"
-        collapsedWidth="0"
-        onBreakpoint={(broken) => {
-          console.log(broken);
-        }}
-        onCollapse={(collapsed, type) => {
-          console.log(collapsed, type);
-        }}
-      >
-        <div
-          style={{
-            height: "4rem",
-            color: "white",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          <h1>PH-Uni</h1>
-        </div>
-        <Menu
-          theme="dark"
-          mode="inline"
-          defaultSelectedKeys={["4"]}
-          items={adminSidebarItem}
-        />
-      </Sider>
+      <Sidebar></Sidebar>
       <Layout>
         <Header style={{ padding: 0 }} />
         <Content style={{ margin: "24px 16px 0" }}>
