@@ -1,6 +1,6 @@
 import "./App.css";
 import MainLayout from "./components/layout/MainLayout";
-import ProtectedRoutes from "./components/layout/protectedRoutes";
+import ProtectedRoutes from "./components/layout/ProtectedRoutes";
 
 function App() {
   return (

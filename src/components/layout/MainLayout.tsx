@@ -4,9 +4,11 @@
 //   VideoCameraOutlined,
 // } from "@ant-design/icons";
 
-import { Layout } from "antd";
+import { Button, Layout } from "antd";
 import { Outlet } from "react-router";
 import Sidebar from "./Sidebar";
+import { useAppDispath } from "../../redux/hooks";
+import { logout } from "../../redux/features/auth/authSlice";
 
 // import { createElement } from "react";
 
@@ -37,11 +39,18 @@ const { Header, Content, Footer } = Layout;
 //   },
 // ];
 const MainLayout = () => {
+  const dispatch = useAppDispath();
+
+  const handlLogOut = () => {
+    dispatch(logout());
+  };
   return (
     <Layout style={{ height: "100vh" }}>
       <Sidebar></Sidebar>
       <Layout>
-        <Header style={{ padding: 0 }} />
+        <Header style={{ padding: 0 }}>
+          <Button onClick={handlLogOut}>LogOut</Button>
+        </Header>
         <Content style={{ margin: "24px 16px 0" }}>
           <div
             style={{
