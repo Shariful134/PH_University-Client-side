@@ -45,10 +45,12 @@ const MainLayout = () => {
     dispatch(logout());
   };
   return (
-    <Layout style={{ height: "100vh" }}>
+    <Layout style={{ height: "100%" }}>
       <Sidebar></Sidebar>
       <Layout>
-        <Header style={{ padding: 0 }}>
+        <Header
+          style={{ padding: "0", position: "sticky", top: "0", left: "0" }}
+        >
           <Button onClick={handlLogOut}>LogOut</Button>
         </Header>
         <Content style={{ margin: "24px 16px 0" }}>
