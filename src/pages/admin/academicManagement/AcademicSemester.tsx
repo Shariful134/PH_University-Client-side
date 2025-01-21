@@ -1,54 +1,54 @@
-import { Table } from "antd";
+import { Button, Table } from "antd";
 import type { TableColumnsType, TableProps } from "antd";
 import { useGetAllSemesterQuery } from "../../../redux/features/admin/academicManagementApi";
+import { TAcademicSemester, TqueryParams } from "../../../constant/global";
+import { useState } from "react";
 
-interface DataType {
-  key: React.Key;
-  name: string;
-  age: number;
-  address: string;
-}
+export type DataType = Pick<
+  TAcademicSemester,
+  "name" | "year" | "startMonth" | "endMonth"
+>;
 
 const AcademicSemester = () => {
-  const { data: semesterData } = useGetAllSemesterQuery(undefined);
+  const [params, setParams] = useState<TqueryParams[] | undefined>(undefined);
+  const {
+    data: semesterData,
+    isLoading,
+    isFetching,
+  } = useGetAllSemesterQuery(params);
+  console.log({ isLoading, isFetching });
+  // const { data: semesterData } = useGetAllSemesterQuery([
+  //   { name: "year", value: "2025" },
+  // ]);
   const tableData = semesterData?.data?.map(
     ({ _id, name, year, startMonth, endMonth }) => ({
-      _id,
+      key: _id,
       name,
       year,
       startMonth,
       endMonth,
     })
   );
-  console.log(semesterData);
+  // console.log(semesterData);
 
   const columns: TableColumnsType<DataType> = [
     {
       title: "Name",
+      key: "name",
       dataIndex: "name",
       showSorterTooltip: { target: "full-header" },
       filters: [
         {
-          text: "Joe",
-          value: "Joe",
+          text: "Autumn",
+          value: "Autumn",
         },
         {
-          text: "Jim",
-          value: "Jim",
+          text: "Fall",
+          value: "Fall",
         },
         {
-          text: "Submenu",
-          value: "Submenu",
-          children: [
-            {
-              text: "Green",
-              value: "Green",
-            },
-            {
-              text: "Black",
-              value: "Black",
-            },
-          ],
+          text: "Summer",
+          value: "Summer",
         },
       ],
       // // specify the condition of filtering result
@@ -59,7 +59,38 @@ const AcademicSemester = () => {
     },
     {
       title: "Year",
+      key: "year",
       dataIndex: "year",
+      filters: [
+        {
+          text: "2024",
+          value: "2024",
+        },
+        {
+          text: "2025",
+          value: "2025",
+        },
+        {
+          text: "2026",
+          value: "2026",
+        },
+        {
+          text: "2027",
+          value: "2027",
+        },
+        {
+          text: "2028",
+          value: "2028",
+        },
+        {
+          text: "2029",
+          value: "2029",
+        },
+        {
+          text: "2030",
+          value: "2030",
+        },
+      ],
       // defaultSortOrder: "descend",
       //   sorter: (a, b) => a.age - b.age,
     },
@@ -81,11 +112,24 @@ const AcademicSemester = () => {
     // },
     {
       title: "Start Month",
+      key: "startMonth",
       dataIndex: "startMonth",
     },
     {
       title: "End Month",
+      key: "endMonth",
       dataIndex: "endMonth",
+    },
+    {
+      title: "Action",
+      key: "x",
+      render: () => {
+        return (
+          <div>
+            <Button style={{ backgroundColor: "#E8EEFC" }}>Update</Button>
+          </div>
+        );
+      },
     },
   ];
 
@@ -117,17 +161,31 @@ const AcademicSemester = () => {
   // ];
 
   const onChange: TableProps<DataType>["onChange"] = (
-    pagination,
+    _pagination,
     filters,
-    sorter,
+    _sorter,
     extra
   ) => {
-    console.log("params", pagination, filters, sorter, extra);
+    console.log({ filters, extra });
+    if (extra.action === "filter") {
+      const queryParams: TqueryParams[] = [];
+      filters.name?.forEach((item) =>
+        queryParams.push({ name: "name", value: item })
+      );
+      filters.year?.forEach((item) =>
+        queryParams.push({ name: "year", value: item })
+      );
+      setParams(queryParams);
+      console.log("queryParams:", typeof queryParams[0].value);
+    }
   };
-
+  // if (isLoading) {
+  //   return <p>Loading...</p>;
+  // }
   return (
     <div>
       <Table<DataType>
+        loading={isFetching}
         columns={columns}
         dataSource={tableData}
         onChange={onChange}

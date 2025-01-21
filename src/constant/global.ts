@@ -1,4 +1,5 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+import { BaseQueryApi } from "@reduxjs/toolkit/query";
+
 export type TError = {
   data: {
     message: string;
@@ -8,10 +9,47 @@ export type TError = {
   status: number;
 };
 
-export type TResponseError = {
-  data?: any;
-  error: TError;
+export type TMeta = {
+  limit: number;
+  page: number;
+  total: number;
+  totalPage: number;
 };
+
+// export type TResponse = {
+//   data?: any;
+//   message: string;
+//   meta?: {
+//     page: number;
+//     limit: number;
+//     total: number;
+//     totalPage: number;
+//   };
+//   error?: any;
+
+//   success: boolean;
+// };
+
+export type TResponse<T> = {
+  data?: T;
+  error?: TError;
+  meta?: TMeta;
+  success: boolean;
+  message: string;
+};
+export type TAcademicSemester = {
+  name: string;
+  year: string;
+  code: string;
+  startMonth: string;
+  endMonth: string;
+  _id: string;
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
+};
+
+export type TResponseRedux<T> = TResponse<T> & BaseQueryApi;
 export const MonthNames = [
   "January",
   "February",
@@ -26,6 +64,11 @@ export const MonthNames = [
   "November",
   "December",
 ];
+
+export type TqueryParams = {
+  name: string;
+  value: boolean | React.Key;
+};
 
 export const monthOptions = MonthNames.map((item) => ({
   value: item,
