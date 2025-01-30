@@ -5,7 +5,11 @@ import PHForm from "../../../components/form/PHForm";
 import PHSelect from "../../../components/form/PHSelect";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { nameOptions } from "../../../constant/semester";
-import { monthOptions, TResponseError } from "../../../constant/global";
+import {
+  monthOptions,
+  TAcademicSemester,
+  TResponse,
+} from "../../../constant/global";
 import { academicSemesterShema } from "../../../shemas/academicManagement";
 import { useAddAcademicSemesterMutation } from "../../../redux/features/admin/academicManagementApi";
 import { toast } from "sonner";
@@ -29,7 +33,9 @@ const CreateAcademicSemester = () => {
       endMonth: data.endMonth,
     };
     try {
-      const res = (await addAcademicSemester(semesterData)) as TResponseError;
+      const res = (await addAcademicSemester(
+        semesterData
+      )) as TResponse<TAcademicSemester>;
       if (res.error) {
         toast.error(res.error.data.message);
       } else {

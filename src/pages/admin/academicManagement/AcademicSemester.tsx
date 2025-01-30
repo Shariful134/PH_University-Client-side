@@ -11,6 +11,7 @@ export type DataType = Pick<
 
 const AcademicSemester = () => {
   const [params, setParams] = useState<TqueryParams[] | undefined>(undefined);
+
   const {
     data: semesterData,
     isLoading,
@@ -126,7 +127,14 @@ const AcademicSemester = () => {
       render: () => {
         return (
           <div>
-            <Button style={{ backgroundColor: "#E8EEFC" }}>Update</Button>
+            <Button
+              style={{
+                backgroundColor: "#E6E7EE",
+                boxShadow: "2px 4px 8px  rgba(22, 22, 22, 0.15)",
+              }}
+            >
+              Update
+            </Button>
           </div>
         );
       },

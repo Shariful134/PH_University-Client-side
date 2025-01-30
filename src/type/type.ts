@@ -12,8 +12,27 @@ export type TUserPaths = {
   children?: TUserPaths[];
 };
 
-export type TSidebarItem = {
-  key: string;
-  label?: ReactNode;
-  children?: TSidebarItem[];
+export type TSidebarItem =
+  | {
+      key: string;
+      label?: ReactNode;
+      children?: TSidebarItem[];
+    }
+  | undefined;
+
+export type TFaculty = {
+  _id?: string;
+  name: string;
+};
+export type TDepertment = {
+  value: string;
+  label: string;
+  name: string;
+};
+export type TDepertmentData = {
+  id: string;
+  name: string;
+  academicFaculty: string;
+  createdAt: string;
+  updatedAt: string;
 };

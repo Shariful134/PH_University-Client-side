@@ -1,13 +1,15 @@
 import AdminDashboard from "../pages/admin/AdminDashboard";
-import CreateStudent from "../pages/admin/CreateStudent";
-import CreateFaculty from "../pages/admin/CreateFaculty";
-import CreateAdmin from "../pages/admin/CreateAdmin";
-import AcademicSemester from "../pages/admin/academicManagement/academicSemester";
+import CreateStudent from "../pages/admin/userManagement/CreateStudent";
+import CreateFaculty from "../pages/admin/userManagement/CreateFaculty";
+import CreateAdmin from "../pages/admin/userManagement/CreateAdmin";
 import CreateAcademicSemester from "../pages/admin/academicManagement/CreateAcademicSemester";
 import CreateAcademicFaculty from "../pages/admin/academicManagement/CreateAcademicFaculty";
 import AcademicFaculty from "../pages/admin/academicManagement/AcademicFaculty";
 import AcademicDepertment from "../pages/admin/academicManagement/AcademicDepertment";
 import CreateAcademicDeperetment from "../pages/admin/academicManagement/CreateAcademicDeperetment";
+import AcademicSemester from "../pages/admin/academicManagement/academicSemester";
+import StudentData from "../pages/admin/userManagement/StudentData";
+import StudentDetails from "../pages/admin/userManagement/StudentDetails";
 
 export const adminPaths = [
   {
@@ -54,6 +56,20 @@ export const adminPaths = [
     name: "User Manegement",
     children: [
       {
+        name: "Create Student",
+        path: "create-student",
+        element: <CreateStudent></CreateStudent>,
+      },
+      {
+        name: "Students",
+        path: "students-data",
+        element: <StudentData></StudentData>,
+      },
+      {
+        path: "students-data/:studentId",
+        element: <StudentDetails></StudentDetails>,
+      },
+      {
         name: "Create Admin",
         path: "create-admin",
         element: <CreateAdmin></CreateAdmin>,
@@ -62,11 +78,6 @@ export const adminPaths = [
         name: "Create Faculty",
         path: "create-faculty",
         element: <CreateFaculty></CreateFaculty>,
-      },
-      {
-        name: "Create Student",
-        path: "create-student",
-        element: <CreateStudent></CreateStudent>,
       },
     ],
   },
