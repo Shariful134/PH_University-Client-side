@@ -97,6 +97,27 @@ export const studentDefaultData = {
   // isDeleted: false,
   // academicDepartment: "6766e4f1402610e6725a91e0",
 };
+
+export const facultyDefaultData = {
+  user: "2024010001",
+  designation: "Software Engineer",
+  name: {
+    firstName: "Shariful",
+    middleName: "Islam",
+    lastName: "Easha",
+  },
+  gender: "male",
+  // dateOfBirth: "1995-05-15",
+  email: "shariful32213@gmail.com",
+  contactNo: "+1234567890",
+  emergencyContactNo: "+0987654321",
+  bloogGroup: "O+",
+  presentAddress: "123 Main St, Cityville, Country",
+  permanentAddress: "456 Oak Ave, Townsville, Country",
+  // profileImg: "https://example.com/profile-img.jpg",
+  // academicDepartment: "605c72ef1532072bc9b7c6d2",
+  // academicFaculty: "605c72ef1532072bc9b7c6d3",
+};
 // ======================this should be remoove===================
 
 export const bloogGroupsOptions = bloogGroups.map((item) => ({

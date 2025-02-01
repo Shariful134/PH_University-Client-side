@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Button, Pagination, Space, Table } from "antd";
 import type { TableColumnsType, TableProps } from "antd";
 
@@ -125,18 +126,18 @@ const StudentData = () => {
     _sorter,
     extra
   ) => {
-    console.log({ filters, extra });
-    if (extra.action === "filter") {
-      const queryParams: TqueryParams[] = [];
-      filters.name?.forEach((item) =>
-        queryParams.push({ name: "name", value: item })
-      );
-      filters.year?.forEach((item) =>
-        queryParams.push({ name: "year", value: item })
-      );
-      setParams(queryParams);
-      console.log("queryParams:", typeof queryParams[0].value);
-    }
+    // console.log({ filters, extra });
+    // if (extra.action === "filter") {
+    //   const queryParams: TqueryParams[] = [];
+    //   filters.name?.forEach((item) =>
+    //     queryParams.push({ name: "name", value: item })
+    //   );
+    //   filters.year?.forEach((item) =>
+    //     queryParams.push({ name: "year", value: item })
+    //   );
+    //   setParams(queryParams);
+    //   console.log("queryParams:", typeof queryParams[0].value);
+    // }
   };
   // if (isLoading) {
   //   return <p>Loading...</p>;

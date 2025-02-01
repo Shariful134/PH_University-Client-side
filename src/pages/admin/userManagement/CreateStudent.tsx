@@ -7,6 +7,7 @@ import {
   bloogGroupsOptions,
   gendersOptions,
   studentDefaultData,
+  TResponse,
 } from "../../../constant/global";
 import PHDatePicker from "../../../components/form/PHDatePicker";
 import { useGetAllSemesterQuery } from "../../../redux/features/admin/academicManagementApi";
@@ -35,18 +36,30 @@ const CreateStudent = () => {
     label: item.name,
   }));
 
-  const onsubmit: SubmitHandler<FieldValues> = (data) => {
-    // console.log(data);
+  const onsubmit: SubmitHandler<FieldValues> = async (data) => {
+    console.log(data);
     const studentData = {
       password: "student123",
       student: data,
     };
+    console.log("studentData: ", studentData);
     const formData = new FormData();
+
     formData.append("data", JSON.stringify(studentData));
     formData.append("file", data.profileImg);
-    addStudent(formData).then(() => {
-      toast.success("Student Created Successfully");
-    });
+
+    try {
+      const res = (await addStudent(formData)) as TResponse<any>;
+      // console.log("create faculty: ", res);
+      if (res.error) {
+        toast.error(res.error.data.message);
+      } else {
+        toast.success("Depertment Created SucceccFully!");
+      }
+    } catch (error) {
+      console.log(error);
+      // toast.error("Somthing went wrong!");
+    }
 
     //this for development and just checking
     // formData.append("somthing", " data of somthing");
@@ -114,19 +127,6 @@ const CreateStudent = () => {
                   </Form.Item>
                 )}
               />
-              {/* <Controller
-                name="profileImg"
-                render={({ field: { onChange, value, ...field } }) => (
-                  <Form.Item label="Profile Image">
-                    <Input
-                      type="file"
-                      value={value?.filename}
-                      {...field}
-                      onChange={(e) => onChange(e.target.files?.[0])}
-                    ></Input>
-                  </Form.Item>
-                )}
-              /> */}
             </Col>
             <Divider>Contact Info</Divider>
             <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>

@@ -11,13 +11,7 @@ const userManagementApi = baseApi.injectEndpoints({
         body: data,
       }),
     }),
-    // getAllStudent: builder.query({
-    //   query: (data) => ({
-    //     url: "/users/create-student",
-    //     method: "POST",
-    //     body: data,
-    //   }),
-    // }),
+
     getAllStudent: builder.query({
       query: (args) => {
         console.log("args:", args);
@@ -44,8 +38,18 @@ const userManagementApi = baseApi.injectEndpoints({
         };
       },
     }),
+    addFaculty: builder.mutation({
+      query: (data) => ({
+        url: "/users/create-faculty",
+        method: "POST",
+        body: data,
+      }),
+    }),
   }),
 });
 
-export const { useAddStudentMutation, useGetAllStudentQuery } =
-  userManagementApi;
+export const {
+  useAddStudentMutation,
+  useGetAllStudentQuery,
+  useAddFacultyMutation,
+} = userManagementApi;
