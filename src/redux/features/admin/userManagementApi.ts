@@ -45,6 +45,22 @@ const userManagementApi = baseApi.injectEndpoints({
         body: data,
       }),
     }),
+
+    getAllFaculty: builder.query({
+      query: (args) => {
+        const params = new URLSearchParams();
+        if (args) {
+          args.forEach((item: TqueryParams) => {
+            params.append(item.name, item.value as string);
+          });
+        }
+        return {
+          url: "/faculties",
+          method: "GET",
+          params: params,
+        };
+      },
+    }),
   }),
 });
 
@@ -52,4 +68,5 @@ export const {
   useAddStudentMutation,
   useGetAllStudentQuery,
   useAddFacultyMutation,
+  useGetAllFacultyQuery,
 } = userManagementApi;
