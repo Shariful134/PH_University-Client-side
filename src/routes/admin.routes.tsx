@@ -12,6 +12,7 @@ import StudentData from "../pages/admin/userManagement/StudentData";
 import StudentDetails from "../pages/admin/userManagement/StudentDetails";
 import SemesterRegistered from "../pages/admin/CourseManagement/SemesterRegistered";
 import SemesterRegisteredData from "../pages/admin/CourseManagement/SemesterRegisteredData";
+import CreateCourses from "../pages/admin/CourseManagement/CreateCourses";
 
 export const adminPaths = [
   {
@@ -96,6 +97,11 @@ export const adminPaths = [
         name: "Data Semester Registered",
         path: "data-semester-registered",
         element: <SemesterRegisteredData></SemesterRegisteredData>,
+      },
+      {
+        name: "Create Course",
+        path: "create-course",
+        element: <CreateCourses></CreateCourses>,
       },
     ],
   },

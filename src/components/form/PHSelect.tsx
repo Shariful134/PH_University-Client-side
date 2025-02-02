@@ -5,15 +5,17 @@ type TPHSelect = {
   name: string;
   options: { value: string; label: string }[] | undefined;
   disabled?: boolean;
+  mode?: "multiple" | "undefined";
 };
 
-const PHSelect = ({ label, name, options, disabled }: TPHSelect) => {
+const PHSelect = ({ label, name, options, disabled, mode }: TPHSelect) => {
   return (
     <Controller
       name={name}
       render={({ field, fieldState: { error } }) => (
         <Form.Item label={label}>
           <Select
+            mode={mode}
             {...field}
             style={{ width: "100%" }}
             options={options}
