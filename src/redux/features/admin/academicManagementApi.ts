@@ -9,14 +9,13 @@ const academicSemesterApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     getAllSemester: builder.query({
       query: (args) => {
-        console.log("args:", args);
         const params = new URLSearchParams();
         if (args) {
           args.forEach((item: TqueryParams) => {
             params.append(item.name, item.value as string);
           });
         }
-        console.log("params: ", params);
+        // console.log("params: ", params);
         // params.append(args[0].name, args[0].value);
         return {
           url: "/academic-semesters",

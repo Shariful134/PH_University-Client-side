@@ -9,8 +9,10 @@ import {
 } from "../../../redux/features/admin/courseManagement";
 import { toast } from "sonner";
 import { TResponse } from "../../../constant/global";
+import { useState } from "react";
 
 const CreateCourses = () => {
+  const [courseId, setCourseId] = useState("");
   const [addCourse] = useAddCourseMutation();
   const { data: allCourses } = useGetAllCoursesQuery(undefined);
 
