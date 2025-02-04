@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button, Col, Divider, Form, Input, Row } from "antd";
 import PHForm from "../../../components/form/PHForm";
 import { Controller, FieldValues, SubmitHandler } from "react-hook-form";
@@ -61,7 +62,7 @@ const CreateFaculty = () => {
       if (res.error) {
         toast.error(res.error.data.message);
       } else {
-        toast.success("Depertment Created SucceccFully!");
+        toast.success(res?.data?.message);
       }
     } catch (error) {
       console.log(error);

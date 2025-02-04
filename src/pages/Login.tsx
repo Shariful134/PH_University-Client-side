@@ -1,4 +1,4 @@
-import { Button, Row } from "antd";
+import { Button, Divider, Row } from "antd";
 import { FieldValues } from "react-hook-form";
 import { useLoginMutation } from "../redux/features/auth/authApi";
 import { useAppDispath } from "../redux/hooks";
@@ -14,8 +14,8 @@ const Login = () => {
   const dispatch = useAppDispath();
 
   const defaultValues = {
-    userId: "A-0001",
-    password: "admin123",
+    userId: "2026010002",
+    password: "student123",
   };
 
   const [login, { error }] = useLoginMutation();
@@ -32,10 +32,15 @@ const Login = () => {
 
       const res = await login(userInfo).unwrap();
       const user = verifyToken(res.data.accessToken) as TUser;
-      console.log(user);
+      console.log(res);
       dispatch(setUser({ user: user, token: res.data.accessToken }));
       toast.success("Logged in", { id: toastId, duration: 1000 });
-      navigate(`/${user.role}/dashboard`);
+
+      if (res?.data?.needsPasswordChange) {
+        navigate(`/change-password`);
+      } else {
+        navigate(`/${user.role}/dashboard`);
+      }
     } catch {
       toast.error("Something Went Wrong", { id: toastId, duration: 1000 });
     }
@@ -43,6 +48,7 @@ const Login = () => {
 
   return (
     <Row justify="center" align="middle" style={{ height: "100vh" }}>
+      <Divider>Please Login Now</Divider>
       <PHForm onSubmit={onSubmit} defaultValues={defaultValues}>
         <PHInput type="text" name="userId" label="ID"></PHInput>
 

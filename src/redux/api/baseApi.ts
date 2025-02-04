@@ -9,6 +9,8 @@ import {
 } from "@reduxjs/toolkit/query/react";
 import { RootState } from "../store";
 import { logout, setUser } from "../features/auth/authSlice";
+import { toast } from "sonner";
+import { TResponse } from "../../constant/global";
 
 const baseQuery = fetchBaseQuery({
   baseUrl: "http://localhost:3000/api/v1",
@@ -27,12 +29,15 @@ const baseQueryWithRefreshToken: BaseQueryFn<
   BaseQueryApi,
   DefinitionType
 > = async (args, api, extraOptions): Promise<any> => {
-  let result = await baseQuery(args, api, extraOptions);
-  // console.log("args: ", args);
+  let result = (await baseQuery(args, api, extraOptions)) as TResponse<any>;
+  console.log("result: ", result);
 
-  // if (result?.error?.status === 404) {
-  //   toast.error(result.error.data.message);
-  // }
+  if (result?.error?.status === 404) {
+    toast.error(result?.error?.data?.message);
+  }
+  if (result?.error?.status === 403) {
+    toast.error(result?.error?.data?.message);
+  }
 
   if (result?.error?.status === 401) {
     console.log("Sending Refresh token ");

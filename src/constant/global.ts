@@ -102,9 +102,9 @@ export const facultyDefaultData = {
   user: "2024010001",
   designation: "Software Engineer",
   name: {
-    firstName: "Shariful",
+    firstName: "Liya",
     middleName: "Islam",
-    lastName: "Easha",
+    lastName: "Shariful",
   },
   gender: "male",
   // dateOfBirth: "1995-05-15",

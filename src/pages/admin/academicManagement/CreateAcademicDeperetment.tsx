@@ -40,7 +40,7 @@ const CreateAcademicDeperetment = () => {
       (depertmentName) => depertmentName.label === selectFaculty.label
     );
     const depertmentData = {
-      name: selectDepertment.name,
+      name: selectDepertment?.name,
       academicFaculty: data.name,
     };
     console.log("depertmentData: ", depertmentData);

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { FieldValues, SubmitHandler } from "react-hook-form";
 
 import { useGetAllSemesterQuery } from "../../../redux/features/admin/academicManagementApi";
@@ -8,18 +9,26 @@ import PHSelectWithwatch from "../../../components/form/PHSelectWithwatch";
 import { useState } from "react";
 import PHSelect from "../../../components/form/PHSelect";
 import {
+  useCreateaOfferedCourseMutation,
   useGetAllCourseFacultiesQuery,
   useGetAllCoursesQuery,
   useGetAllRegisteredSemesterQuery,
 } from "../../../redux/features/admin/courseManagement";
 import { useGetAllcademicFacultyQuery } from "../../../redux/features/admin/academicFacultyApi";
 import { useGetAllcademicDepertmentQuery } from "../../../redux/features/admin/academicDepertmentApi";
-import PHTimePicker from "../../../components/form/PHTimePicker";
+import { TResponse } from "../../../constant/global";
+import { toast } from "sonner";
+
+import TimePickers from "../../../components/form/PhTime";
+import PhTime from "../../../components/form/PhTime";
 
 const CreateOfferedCourses = () => {
   const [id, setId] = useState("");
   const [courseId, setCourseId] = useState("");
   //   console.log("Inside parent component: ", id);
+
+  const [offeredCourseCreate] = useCreateaOfferedCourseMutation();
+
   const { data: academicSemester } = useGetAllSemesterQuery(undefined);
   const { data: semesterRegisData } =
     useGetAllRegisteredSemesterQuery(undefined);
@@ -69,8 +78,26 @@ const CreateOfferedCourses = () => {
     value: item,
   }));
 
-  const onsubmit: SubmitHandler<FieldValues> = (data) => {
+  const onsubmit: SubmitHandler<FieldValues> = async (data) => {
     console.log(data);
+    const offeredCourseData = {
+      ...data,
+      section: Number(data.section),
+      maxCapacity: Number(data.maxCapacity),
+    };
+    // console.log(offeredCourseData);
+    // try {
+    //   const res = (await offeredCourseCreate(
+    //     offeredCourseData
+    //   )) as TResponse<any>;
+    //   if (res?.error) {
+    //     toast.error(res.error.data.message);
+    //   } else {
+    //     toast.success(res.data.message);
+    //   }
+    // } catch (error) {
+    //   console.log(error);
+    // }
   };
   return (
     <div>
@@ -137,16 +164,22 @@ const CreateOfferedCourses = () => {
               </Col>
               <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>
                 <PHSelect
+                  mode="multiple"
                   name="days"
                   label="Days"
                   options={daysOptions}
                 ></PHSelect>
               </Col>
               <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>
-                <PHTimePicker name="startTime" label="StartTime"></PHTimePicker>
+                {/* <PHTimePicker name="startTime" label="StartTime"></PHTimePicker>
+                 */}
+
+                <PhTime></PhTime>
               </Col>
               <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>
-                <PHTimePicker name="endTime" label="EndTime"></PHTimePicker>
+                {/* <PHTimePicker name="endTime" label="EndTime"></PHTimePicker>
+                 */}
+                <PhTime></PhTime>
               </Col>
             </Row>
             <Button htmlType="submit">Submit</Button>

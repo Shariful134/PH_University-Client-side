@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Controller, FieldValues, SubmitHandler } from "react-hook-form";
 import PHForm from "../../../components/form/PHForm";
 import PHInput from "../../../components/form/PHInput";
@@ -54,7 +55,7 @@ const CreateStudent = () => {
       if (res.error) {
         toast.error(res.error.data.message);
       } else {
-        toast.success("Depertment Created SucceccFully!");
+        toast.success(res?.data?.message);
       }
     } catch (error) {
       console.log(error);
